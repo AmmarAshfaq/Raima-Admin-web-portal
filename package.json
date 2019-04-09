@@ -11,7 +11,8 @@
     "redux": "^4.0.1",
     "redux-observable": "^1.1.0",
     "rxjs": "^6.4.0",
-    "rxjs-compat": "^6.4.0"
+    "rxjs-compat": "^6.4.0",
+    "semantic-ui-react": "^0.86.0"
   },
   "scripts": {
     "start": "react-scripts start",
