@@ -1,37 +1,42 @@
 import React, { Component } from 'react';
-import ReactDataGrid from 'react-data-grid';
 import Main from './components/Main';
 import TopNavBar from './container/TopNavBar'
 import SideNavbar from './container/SideNavBar';
 import { Grid } from 'semantic-ui-react';
-const columns = [
-    { key: 'id', name: 'ID', dragable: true },
-    { key: 'title', name: 'Title', dragable: false },
-    { key: 'count', name: 'Count', dragable: true }];
-const rows = [{ id: 0, title: 'row1', count: 20 }, { id: 1, title: 'row1', count: 40 }, { id: 2, title: 'row1', count: 60 }, { id: 3, title: 'row1', count: 60 }];
+import { Provider } from 'react-redux';
+
+import store from '../store'
+// const columns = [
+//     { key: 'id', name: 'ID', dragable: true },
+//     { key: 'title', name: 'Title', dragable: false },
+//     { key: 'count', name: 'Count', dragable: true }];
+// const rows = [{ id: 0, title: 'row1', count: 20 }, { id: 1, title: 'row1', count: 40 }, { id: 2, title: 'row1', count: 60 }, { id: 3, title: 'row1', count: 60 }];
 class App extends Component {
     render() {
         return (
-            <div >
-                <div >
-                    <TopNavBar />
-                </div>
-                <div style={{ display: 'flex' }}>
-                    <div style={{ flex: 1 }} >
-                        <SideNavbar />
+            <Provider store={store}>
+                <div>
+
+                    <div >
+                        <TopNavBar />
                     </div>
-                    <div style={{ flex: 4 }}>
-                        <Main />
+                    <div style={{ display: 'flex' }}>
+                        <div style={{ flex: 1 }} >
+                            <SideNavbar />
+                        </div>
+                        <div style={{ flex: 4 }}>
+                            <Main />
+                        </div>
                     </div>
-                </div>
-                {/* <ReactDataGrid
+                    {/* <ReactDataGrid
                     columns={columns}
                     rowGetter={i => rows[i]}
                     rowsCount={4}
                     minHeight={150}
                     cellNavigationMode='loopOverRow'
                     enableDragAndDrop={true} /> */}
-            </div>
+                </div>
+            </Provider>
         );
     }
 }

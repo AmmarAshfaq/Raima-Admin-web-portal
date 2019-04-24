@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App/App';
 import * as serviceWorker from './serviceWorker';
-import rootReducer from './store/reducers/root';
-import { createStore, applyMiddleware } from 'redux';
-import { rootEpic } from './store/epics';
-import { createEpicMiddleware } from 'redux-observable';
-import { Provider } from 'react-redux';
+// import rootReducer from './store/reducers/root';
+// import { createStore, applyMiddleware } from 'redux';
+// import { rootEpic } from './store/epics';
+// import { createEpicMiddleware } from 'redux-observable';
+// import { Provider } from 'react-redux';
 import NewReact from './NewReact';
 // const epicMiddleware = createEpicMiddleware();
 

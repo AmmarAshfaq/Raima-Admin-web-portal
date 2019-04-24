@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Header, Divider, Card, Icon, Grid, GridRow, Button, Modal, Form } from 'semantic-ui-react';
-
+import { connect } from 'react-redux';
+import { createCustomerAction } from '../../store/action'
 const optionsSex = [
     { key: 'm', text: 'Male', value: 'male' },
     { key: 'f', text: 'Female', value: 'female' },
@@ -34,7 +35,7 @@ const optionInstallment = [
         key: 'false', text: 'False', value: 'false'
     },
 ]
-export default class Main extends Component {
+class Main extends Component {
     constructor() {
         super();
         this.state = {
@@ -56,7 +57,8 @@ export default class Main extends Component {
             installmentAmount: 0,
             installmentPaid: false,
             instalmentDueDate: '',
-            // value:""
+            downpaymentAmount: 0,
+            uid: ''
         }
     }
 
@@ -72,8 +74,36 @@ export default class Main extends Component {
         })
     }
     onSubmit = () => {
-        console.log(this.state);
-
+        // console.log(this.state);
+        const { value, uid, fname, downpaymentAmount, lname, pNum, postal, gender, streetAddress, city, state, country, email, dob, nic, installmentAmount, installmentNo, installmentDate, installmentPaid, instalmentDueDate } = this.state;
+        console.log(this.state)
+        if (fname !== '' && lname !== '' && pNum !== '' && postal !== '' && gender !== '' && downpaymentAmount !== 0 && streetAddress !== '' && city !== '' && state !== '' && country !== '' && email !== '' && dob !== '' && nic !== '' && installmentAmount !== '' && installmentNo !== '' && installmentDate !== '' && instalmentDueDate !== ''
+        ) {
+            console.log('run')
+            this.props.createCustomerComponent({
+                fname,
+                lname,
+                pNum,
+                postal,
+                gender,
+                streetAddress,
+                city,
+                state,
+                country,
+                email,
+                dob,
+                nic,
+                installmentAmount,
+                installmentDate,
+                installmentNo,
+                installmentPaid,
+                instalmentDueDate,
+                downpaymentAmount,
+                uid
+            });
+        } else {
+            alert('Please enter all required field')
+        }
         this.setState({
             fname: '',
             lname: '',
@@ -92,7 +122,9 @@ export default class Main extends Component {
             installmentAmount: 0,
             installmentPaid: false,
             instalmentDueDate: '',
-            modelOpen: false
+            modelOpen: false,
+            downpaymentAmount: 0,
+            uid: ''
         })
 
 
@@ -102,7 +134,7 @@ export default class Main extends Component {
     })
 
     render() {
-        const { value, fname, lname, pNum, postal, gender, streetAddress, city, state, country, email, dob, nic, installmentAmount, installmentNo, installmentDate, installmentPaid, instalmentDueDate } = this.state;
+        const { value, uid, fname, downpaymentAmount, lname, pNum, postal, gender, streetAddress, city, state, country, email, dob, nic, installmentAmount, installmentNo, installmentDate, installmentPaid, instalmentDueDate } = this.state;
         return (
 
             <div >
@@ -164,7 +196,7 @@ export default class Main extends Component {
 
 
                                                 </Form.Group>
-                                                <Form.Group>
+                                                <Form.Group width='equal'>
                                                     <Form.Input fluid label='Installment No' placeholder='Installment No' width={5} name="installmentNo" value={installmentNo} onChange={this.handleChange} />
                                                     <Form.Input type="date" fluid label='Installment Date' placeholder='Installment Date' width={5} name="installmentDate" value={installmentDate} onChange={this.handleChange} />
                                                     <Form.Input fluid label='Installment Amount' placeholder='Installment Amount' width={5} type="Number" name="installmentAmount" value={installmentAmount} onChange={this.handleChange} />
@@ -177,10 +209,10 @@ export default class Main extends Component {
                                                     />
 
                                                 </Form.Group>
-                                                <Form.Group>
+                                                <Form.Group width='equal'>
                                                     <Form.Input type="date" fluid label='Installment Due Date' placeholder='Installment Due Date' name="instalmentDueDate" value={instalmentDueDate} width={5} onChange={this.handleChange} />
-
-
+                                                    <Form.Input fluid label='DownPayment Amount' placeholder='DownPayment Amount' width={5} type="Number" name="downpaymentAmount" value={downpaymentAmount} onChange={this.handleChange} />
+                                                    <Form.Input fluid label='User ID' placeholder='User ID' width={5} name="uid" value={uid} onChange={this.handleChange} />
                                                 </Form.Group>
                                             </Form>
                                         </Modal.Content>
@@ -206,3 +238,15 @@ export default class Main extends Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+
+    }
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        createCustomerComponent: (obj) => dispatch(createCustomerAction(obj))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
