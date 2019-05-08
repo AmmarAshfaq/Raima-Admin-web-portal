@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import Main from './components/Main';
-import TopNavBar from './container/TopNavBar'
-import SideNavbar from './container/SideNavBar';
+
 import { Grid } from 'semantic-ui-react';
 import { Provider } from 'react-redux';
-
+import Routes from '../Routes'
 import store from '../store'
 // const columns = [
 //     { key: 'id', name: 'ID', dragable: true },
@@ -16,18 +15,8 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <div>
+                    <Routes />
 
-                    <div >
-                        <TopNavBar />
-                    </div>
-                    <div style={{ display: 'flex' }}>
-                        <div style={{ flex: 1 }} >
-                            <SideNavbar />
-                        </div>
-                        <div style={{ flex: 4 }}>
-                            <Main />
-                        </div>
-                    </div>
                     {/* <ReactDataGrid
                     columns={columns}
                     rowGetter={i => rows[i]}
