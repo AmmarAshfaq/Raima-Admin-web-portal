@@ -44,6 +44,7 @@ const initialState = {
     isProgress: false,
     isError: false,
     textError: '',
+    userList: null
 
 }
 
@@ -56,6 +57,15 @@ export default (state = initialState, action) => {
         case ActionTypes.CREATE_CUSTOMER_SUCCESS:
             return {
                 ...state,
+            }
+        case ActionTypes.GET_USER_PROGRESS:
+            return {
+                ...state, isProgress: true,
+            }
+        case ActionTypes.GET_USER_SUCCESS:
+            return {
+                ...state, isProgress: false,
+                userList: action.payload
             }
         default:
             return state;
